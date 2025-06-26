@@ -20,6 +20,6 @@ find_package(imgui CONFIG REQUIRED)
 # Link
 target_link_libraries(ImGuiColorTextEdit 
     PUBLIC 
-        boost_regex::boost_regex 
+        boost_regex 
         imgui::imgui
 )
