@@ -14,12 +14,10 @@ target_include_directories(ImGuiColorTextEdit PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}
 
 # 1-line dependency resolution
 
-find_package(boost_regex CONFIG REQUIRED)
 find_package(imgui CONFIG REQUIRED)
 
 # Link
 target_link_libraries(ImGuiColorTextEdit 
-    PUBLIC 
-        boost_regex 
+    PUBLIC
         imgui::imgui
 )
