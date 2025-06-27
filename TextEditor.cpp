@@ -1,7 +1,7 @@
 #include <algorithm>
 #include <string>
 #include <set>
-#include <boost/regex.hpp>
+#include <regex>
 
 #include "TextEditor.h"
 
@@ -12,7 +12,7 @@
 
 
 struct TextEditor::RegexList {
-    std::vector<std::pair<boost::regex, TextEditor::PaletteIndex>> mValue;
+    std::vector<std::pair<std::regex, TextEditor::PaletteIndex>> mValue;
 };
 
 
@@ -99,8 +99,8 @@ void TextEditor::SetLanguageDefinition(LanguageDefinitionId aValue)
 	}
 
     mRegexList->mValue.clear();
-	for (const auto& r : mLanguageDefinition->mTokenRegexStrings)
-        mRegexList->mValue.push_back(std::make_pair(boost::regex(r.first, boost::regex_constants::optimize), r.second));
+        for (const auto& r : mLanguageDefinition->mTokenRegexStrings)
+        mRegexList->mValue.push_back(std::make_pair(std::regex(r.first, std::regex_constants::optimize), r.second));
 
 	Colorize();
 }
@@ -2569,7 +2569,7 @@ void TextEditor::ColorizeRange(int aFromLine, int aToLine)
 		return;
 
 	std::string buffer;
-	boost::cmatch results;
+        std::cmatch results;
 	std::string id;
 
 	int endLine = std::max(0, std::min((int)mLines.size(), aToLine));
@@ -2615,8 +2615,8 @@ void TextEditor::ColorizeRange(int aFromLine, int aToLine)
 				for (const auto& p : mRegexList->mValue)
 				{
 					bool regexSearchResult = false;
-					try { regexSearchResult = boost::regex_search(first, last, results, p.first, boost::regex_constants::match_continuous); }
-					catch (...) {}
+                                        try { regexSearchResult = std::regex_search(first, last, results, p.first, std::regex_constants::match_continuous); }
+                                        catch (const std::regex_error&) {}
 					if (regexSearchResult)
 					{
 						hasTokenizeResult = true;

@@ -8,7 +8,7 @@ Features I've been working on:
 - ctrl + d for selecting next match
 - ctrl + \[ and ctrl + \] for indentation
 - more language definitions for syntax highlighting
-- switched to boost regex which seems more stable
+- switched to std::regex for a lighter dependency
 - ctrl + backspace and ctrl + delete for word mode delete
 - ctrl + / for comment toggling
 - it works without setting a language definition
